@@ -5,8 +5,8 @@ export const react = 'React Subjects';
 // Update the import path if the correct location is './subjects'
 import { Cpp, Java, React } from './js/subjects/Subjects';
 export const cTeacher = {
-  firstName: 'John',
-  lastName: 'Doe',
+  firstName: 'Manny',
+  lastName: 'Gold',
   experienceTeachingC: 10
 };
 
