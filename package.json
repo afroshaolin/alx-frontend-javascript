@@ -1,0 +1,18 @@
+{
+  "scripts": {
+    "build": "tsc",
+    "start-dev": "npm run build && lite-server"
+  },
+  "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0"
+  },
+  "dependencies": {
+    "chokidar": "^4.0.3",
+    "plugin-proposal-export-default-from": "^0.0.1-security",
+    "ts-loader": "^9.5.2",
+    "typescript": "^3.6.4",
+    "webpack": "^5.99.9",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.1"
+  }
+}
