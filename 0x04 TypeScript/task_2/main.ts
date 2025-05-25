@@ -34,40 +34,37 @@ class Teacher implements TeacherInterface {
     }
 }
 
-function createEmployee(salary: number | string): Director | Teacher {
-    if (typeof salary === 'number' && salary < 500) {
-        return new Teacher();
-    }
-    return new Director();
+interface createEmployeeFunction {
+    (salary: number | string): Director | Teacher;
 }
 
-console.log(createEmployee(200) instanceof Teacher ? 'Teacher' : 'Director');
-console.log(createEmployee(1000) instanceof Teacher ? 'Teacher' : 'Director');
-console.log(createEmployee('$500') instanceof Teacher ? 'Teacher' : 'Director');
+const createEmployee: createEmployeeFunction = (salary) =>{
 
-function isDirector(employee: Director | Teacher): employee is Director {
+    const salary_converted = typeof salary === "string" ? parseInt(salary): salary;
+
+    if (salary_converted < 500){
+        return new Teacher();
+    }else{
+        return new Director();
+    }
+
+}
+
+const isDirector = (employee: Director | Teacher): employee is Director => {
     return employee instanceof Director;
 }
 
-function executeWork(employee: Director | Teacher): string {
-    if (isDirector(employee)) {
+const executeWork = (employee: Director | Teacher): string => {
+    if(isDirector(employee))
+    {
         return employee.workDirectorTasks();
+    }else {
+        return employee.workTeacherTasks();
     }
-    return employee.workTeacherTasks();
 }
 
-console.log(executeWork(createEmployee(200)));
-console.log(executeWork(createEmployee(1000)));
+type Subjects = "Math" | "History";
 
-type Subjects = 'Math' | 'History';
-
-function teachClass(todayClass: Subjects): string {
-    if (todayClass === 'Math') {
-        return 'Teaching Math';
-    }
-    return 'Teaching History';
+const teachClass = (todayClass: Subjects) => {
+    return todayClass === "Math" ? "Teaching Math" : "Teaching History";
 }
-
-console.log(teachClass('Math'));
-console.log(teachClass('History'));
-
