@@ -1,4 +1,14 @@
-interface Teacher {
+/**
+ * Represents a teacher with basic personal and employment information.
+ *
+ * @property firstName - The teacher's first name.
+ * @property lastName - The teacher's last name.
+ * @property fullTimeEmployee - Indicates if the teacher is a full-time employee.
+ * @property location - The location where the teacher works.
+ * @property yearsOfExperience - (Optional) The number of years the teacher has worked.
+ * @property extra - (Optional) Additional properties related to the teacher.
+ */
+interface ITeacher {
  firstName: string,
     lastName: string,
     fullTimeEmployee: boolean,
@@ -7,7 +17,13 @@ interface Teacher {
     extra?: object 
 }
 
-class Teacher {
+class TeacherImpl {
+  readonly firstName!: string;
+  readonly lastName!: string;
+  fullTimeEmployee: boolean;
+  location: string;
+  yearsOfExperience?: number;
+
   constructor(
     firstName: string,
     lastName: string,
@@ -26,7 +42,7 @@ class Teacher {
 }
 
 // Example usage:
-const teacher = new Teacher('John', 'Doe', true, 'NY', 10, { contract: true });
+const teacher = new TeacherImpl('John', 'Doe', true, 'NY', 10, { contract: true });
 console.log(teacher);
 
 // should print
@@ -38,7 +54,7 @@ console.log(teacher);
 // location: "NY"
 // yearsOfExperience: 10
 
-interface Directors extends Teacher {
+interface Directors extends ITeacher {
   numberOfReports: number;
 }
 
@@ -69,7 +85,13 @@ interface StudentClassInterface {
 }
 
 class StudentClass implements StudentClassInterface {
-    constructor( firstName: string, lastName: string) {}
+    firstName: string;
+    lastName: string;
+
+    constructor(firstName: string, lastName: string) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 
     workOnHomework(): string {
         return 'Currently working';

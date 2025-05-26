@@ -1,0 +1,36 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch Webpack Dev Server (Root)",
+      "url": "http://localhost:8080",
+      "webRoot": "${workspaceFolder}",
+      "preLaunchTask": "npm: start-dev"
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch Webpack Dev Server (Task)",
+      "url": "http://localhost:8080",
+      "webRoot": "${workspaceFolder}/${input:taskFolder}",
+      "preLaunchTask": "npm: start-dev (task)"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "taskFolder",
+      "type": "pickString",
+      "description": "Select the task folder to debug",
+      "options": [
+        "0x04 TypeScript/task_0",
+        "0x04 TypeScript/task_1",
+        "0x04 TypeScript/task_2",
+        "0x04 TypeScript/task_3",
+        "0x04 TypeScript/task_4",
+        "0x04 TypeScript/task_5"
+      ]
+    }
+  ]
+}

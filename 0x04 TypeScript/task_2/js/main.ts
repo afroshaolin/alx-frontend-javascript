@@ -22,7 +22,10 @@ class Director implements DirectorInterface {
     }
 }
 
-class Teacher implements TeacherInterface {
+class SchoolTeacher implements TeacherInterface {
+    constructor() {
+        // No initialization required for now
+    }
     workFromHome(): string {
         return 'Cannot work from home';
     }
@@ -34,37 +37,39 @@ class Teacher implements TeacherInterface {
     }
 }
 
-interface createEmployeeFunction {
-    (salary: number | string): Director | Teacher;
-}
-
-const createEmployee: createEmployeeFunction = (salary) =>{
-
-    const salary_converted = typeof salary === "string" ? parseInt(salary): salary;
-
-    if (salary_converted < 500){
-        return new Teacher();
-    }else{
-        return new Director();
+function createEmployee(salary: number | string): Director | SchoolTeacher {
+    if (typeof salary === 'number' && salary < 500) {
+        return new SchoolTeacher();
     }
-
+    return new Director();
 }
 
-const isDirector = (employee: Director | Teacher): employee is Director => {
+console.log(createEmployee(200) instanceof SchoolTeacher ? 'Teacher' : 'Director');
+console.log(createEmployee(1000) instanceof SchoolTeacher ? 'Teacher' : 'Director');
+console.log(createEmployee('$500') instanceof SchoolTeacher ? 'Teacher' : 'Director');
+
+function isDirector(employee: Director | SchoolTeacher): employee is Director {
     return employee instanceof Director;
 }
 
-const executeWork = (employee: Director | Teacher): string => {
-    if(isDirector(employee))
-    {
+function executeWork(employee: Director | SchoolTeacher): string {
+    if (isDirector(employee)) {
         return employee.workDirectorTasks();
-    }else {
-        return employee.workTeacherTasks();
     }
+    return employee.workTeacherTasks();
 }
 
-type Subjects = "Math" | "History";
+console.log(executeWork(createEmployee(200)));
+console.log(executeWork(createEmployee(1000)));
 
-const teachClass = (todayClass: Subjects) => {
-    return todayClass === "Math" ? "Teaching Math" : "Teaching History";
+type Subjects = 'Math' | 'History';
+
+function teachClass(todayClass: Subjects): string {
+    if (todayClass === 'Math') {
+        return 'Teaching Math';
+    }
+    return 'Teaching History';
 }
+
+console.log(teachClass('Math'));
+console.log(teachClass('History'));

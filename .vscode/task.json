@@ -1,0 +1,37 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "npm: start-dev",
+      "type": "npm",
+      "script": "start-dev"
+    },
+    {
+      "label": "npm: start-dev (task)",
+      "type": "shell",
+      "command": "npm",
+      "args": [
+        "run",
+        "start-dev"
+      ],
+      "options": {
+        "cwd": "${input:taskFolder}"
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "taskFolder",
+      "type": "pickString",
+      "description": "Select the task folder to debug",
+      "options": [
+        "0x04 TypeScript/task_0",
+        "0x04 TypeScript/task_1",
+        "0x04 TypeScript/task_2",
+        "0x04 TypeScript/task_3",
+        "0x04 TypeScript/task_4",
+        "0x04 TypeScript/task_5"
+      ]
+    }
+  ]
+}
